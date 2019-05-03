@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>js</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	
+	<script type="text/javascript">
+		function createTable(){
+			var body=document.getElementById("table");
+			var tabla=document.createElement("table");
+			var tableBody=document.createElement("tbody");
+			let row=5;
+			let column=6;
+			for(var i=0;i<row;i++){
+				var r=document.createElement("tr");
+				for(var j=0;j<column;j++){
+					var c=document.createElement("td");
+					var textColumn=document.createTextNode("Columna "+j+" fila "+i);
+					c.appendChild(textColumn);
+					r.appendChild(c);
+				}
+				tableBody.appendChild(r);
+			}
+			tabla.appendChild(tableBody);
+			body.appendChild(tabla);
+
+			 
+		}
+	</script>
+</head>
+<body>
+	<div class="container">
+		<header class="header"><h1>Header</h1></header>
+		<section class="section">
+			<p>Section1</p>
+			<button onclick="createTable()">Generate table</button>
+			<section id="table"></section>
+		</section>
+		<section class="section">
+			<h1>Seccion2</h1>
+			<p>Section2</p>
+		</section>
+		<section class="section"><p>Section3</p></section>
+		<footer class="footer"><h1>Footer</h1></footer>	
+	</div>
+	
+</body>
+</html>
