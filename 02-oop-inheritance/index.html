@@ -4,30 +4,6 @@
 	<title></title>
 	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
 	<script type="text/javascript">
-		class Movie{
-			constructor(title, year,duration){
-				this.title=title;
-				this.year=year;
-				this.duration=duration;
-			}
-			pause(){
-				console.log("Se pauso la pelicula:"+this.title);
-			}
-
-			play(){
-				console.log("Se esta reproduciendo la pelicula:"+this.title);
-			}
-
-			resume(){}
-		}
-
-		class Actor{
-			constructor(name,age){
-				this.name=name;
-				this.age=age;
-			}
-		}
-
 		class EventEmitter{
 			constructor(){
 				this.events={};
@@ -54,8 +30,33 @@
 				});
 			}
 		}
-		
-		
+
+		class Movie extends EventEmitter{
+			constructor(title, year,duration){
+				super();
+				this.title=title;
+				this.year=year;
+				this.duration=duration;
+			}
+			pause(){
+				super.emit("Pause");
+			}
+
+			play(){
+				super.emit("Play");
+			}
+
+			resume(){
+				super.emit("Resume");
+			}
+		}
+
+		class Actor{
+			constructor(name,age){
+				this.name=name;
+				this.age=age;
+			}
+		}
 		
 	</script>
 </head>
