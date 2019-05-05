@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	<script type="text/javascript">
+		class Movie{
+			constructor(title, year,duration){
+				this.title=title;
+				this.year=year;
+				this.duration=duration;
+			}
+			pause(){
+				console.log("Se pauso la pelicula:"+this.title);
+			}
+
+			play(){
+				console.log("Se esta reproduciendo la pelicula:"+this.title);
+			}
+
+			resume(){}
+		}
+
+		class Actor{
+			constructor(name,age){
+				this.name=name;
+				this.age=age;
+			}
+		}
+
+		class EventEmitter{
+			constructor(){
+				this.events={};
+			}
+			on(eventName, callback){
+				if(!this.events[eventName] ) {
+					this.events[eventName]=[];
+  				}
+    			this.events[eventName].push(callback);
+			} 
+			emit(eventName){
+				const event = this.events[eventName];
+  				if(event) {
+    				event.forEach(callback=>{
+       					callback.call(null,eventName);
+     				});
+  				 }
+			}
+			off(eventName, callback){
+				const events = this.events[eventName];
+				events.forEach(function(event,index){
+					if(event==callback)
+						events.splice(index,1);
+				});
+			}
+		}
+		
+		
+		
+	</script>
+</head>
+
+<body>	
+	
+</body>
+</html>
