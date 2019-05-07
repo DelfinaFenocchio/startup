@@ -101,6 +101,19 @@
 		lbfMovie.play();
 		lbfMovie.on('Resume',logger.log);
 		lbfMovie.resume();	
+
+		const social={
+			share(friendName){
+				console.log(`${friendName} share ${this.title}`);
+			},
+			like(friendName){
+				console.log(`${friendName} likes ${this.title}`);
+			}
+		};
+		const ironman = new Movie("ironman",2008,"2h6min");
+		Object.assign(ironman,social);
+		ironman.share('Mike Blossom');
+
 	</script>
 </head>
 
