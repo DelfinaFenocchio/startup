@@ -6,9 +6,11 @@
 	
 	<script type="text/javascript">
 		function show(){
-			document.getElementById("hidden").style.opacity='1';
+			document.getElementById("hidden").style.opacity = "1";
 		}
-
+		function alertMessage(){
+			alert("Alert message");
+		}
 	</script>
 </head>
 <body onload="show()">
@@ -19,6 +21,9 @@
 			<section id="hidden">
 				<p>Hello world!</p>
 			</section>
+			<button onclick="alertMessage()">
+				Button
+			</button>
 		</section>
 		<section class="section">
 			<h1>Seccion2</h1>
