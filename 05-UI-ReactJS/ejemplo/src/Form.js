@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-export default class Form extends Component {
+import { addMovie } from './Actions'
+import { connect } from 'react-redux'
+class Form extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -8,7 +10,7 @@ export default class Form extends Component {
       duration: '',
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleAddMovie = this.handleAddMovie.bind(this)
   }
   handleChange(e) {
     const name = e.target.name
@@ -18,19 +20,20 @@ export default class Form extends Component {
     })
   };
 
-  handleSubmit(e) {
+  handleAddMovie(e) {
     e.preventDefault();
-    this.props.onAddMovie(this.state.title, this.state.year, this.state.duration);
+    this.props.addMovie(this.state)
     this.setState({
       title: '',
       year: '',
       duration: ''
     })
+
   }
   render() {
     const { title, year, duration } = this.state
     return (
-      <form className="formMovie" onSubmit={(e) => this.handleSubmit(e)}>
+      <form className="formMovie" onSubmit={this.handleAddMovie}>
         <label>Title</label>
         <input
           className="inputForm"
@@ -62,3 +65,8 @@ export default class Form extends Component {
     )
   }
 }
+const mapDispatchToProps = (dispatch) => ({
+  addMovie: (movie) => dispatch(addMovie(movie))
+});
+
+export default connect(null, mapDispatchToProps)(Form)

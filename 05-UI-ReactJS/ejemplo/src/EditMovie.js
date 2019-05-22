@@ -1,35 +1,42 @@
 import React, { Component } from 'react'
-export default class EditMovie extends Component {
+import { editMovie } from './Actions.js'
+import { connect } from 'react-redux'
+class EditMovie extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      movie: this.props.movie,
+      id: this.props.movie.id,
+      title: this.props.movie.title,
+      duration: this.props.movie.duration,
+      year: this.props.movie.year
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleEditMovie = this.handleEditMovie.bind(this)
   }
 
   handleChange(e) {
-    let movie = Object.assign({}, this.state.movie)
-    movie[0][e.target.name] = e.target.value
-    if (this.props.movie)
-      this.setState({ movie });
+    const name = e.target.name
+    const value = e.target.value
+    this.setState({
+      [name]: value
+    })
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.onEditMovie(this.state.movie)
+  handleEditMovie(e) {
+    e.preventDefault()
+    this.props.editMovie(this.state)
   }
 
   render() {
+    const { title, duration, year } = this.state
     return (
-      <form className="formMovie" onSubmit={(e) => this.handleSubmit(e)}>
+      <form className="formMovie" onSubmit={this.handleEditMovie}>
         <label>Title</label>
         <input
           className="inputForm"
           type="text"
           name="title"
-          defaultValue={this.state.movie[0].title}
+          defaultValue={title}
           required={true}
           onChange={this.handleChange} />
         <label>Year</label>
@@ -39,7 +46,7 @@ export default class EditMovie extends Component {
           min='0'
           max='2019'
           name="year"
-          defaultValue={this.state.movie[0].year}
+          defaultValue={year}
           required={true}
           onChange={this.handleChange} />
         <label>Duration</label>
@@ -47,7 +54,7 @@ export default class EditMovie extends Component {
           className="inputForm"
           type="text"
           name="duration"
-          defaultValue={this.state.movie[0].duration}
+          defaultValue={duration}
           required={true}
           onChange={this.handleChange} />
         <input type="submit" value="Edit" className="btn" />
@@ -56,3 +63,9 @@ export default class EditMovie extends Component {
 
   }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  editMovie: (movie) => dispatch(editMovie(movie))
+});
+
+export default connect(null, mapDispatchToProps)(EditMovie)
