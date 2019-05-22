@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Form from './Form'
 import { v4 } from 'uuid';
+import MoviesList from './MoviesList'
 
 export default class App extends Component {
   constructor(props) {
@@ -29,7 +30,9 @@ export default class App extends Component {
         <h1>Create movie</h1>
         <Form onAddMovie={(title, year, duration) =>
           this.handleAddMovie(title, year, duration)} />
-        
+        <h1>Movies List</h1>
+        <MoviesList movies={this.state.movies} />
+
       </div>
     )
   }
