@@ -17,6 +17,7 @@ export default class App extends Component {
     this.handleAddMovie = this.handleAddMovie.bind(this)
     this.handleEditMovie = this.handleEditMovie.bind(this)
     this.handleSelectMovie = this.handleSelectMovie.bind(this)
+    this.handleRemoveMovie = this.handleRemoveMovie.bind(this)
   }
   handleAddMovie(title, year, duration) {
     const movie = {
@@ -47,6 +48,14 @@ export default class App extends Component {
       showEditForm: false
     })
   }
+  handleRemoveMovie(index) {
+    let moviesList = this.state.movies
+    moviesList.splice(index, 1);
+    this.setState({
+      movies: moviesList
+    })
+  }
+
   render() {
     return (
       <div className="container">
@@ -55,10 +64,11 @@ export default class App extends Component {
           this.handleAddMovie(title, year, duration)} />
         <h1>Movies List</h1>
         <MoviesList movies={this.state.movies}
-          onSelectMovie={(id) => this.handleSelectMovie(id)} />
+          onSelectMovie={(id) => this.handleSelectMovie(id)}
+          onRemoveMovie={(index) => this.handleRemoveMovie(index)} />
         <h1>Edit movie</h1>
         {this.state.showEditForm && <EditMovie movie={this.state.movie}
-          onEditMovie={(movie) => this.handleEditMovie(movie)}/>}
+          onEditMovie={(movie) => this.handleEditMovie(movie)} />}
       </div>
     )
   }
